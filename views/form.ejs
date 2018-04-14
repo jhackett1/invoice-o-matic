@@ -1,0 +1,13 @@
+<%- include partials/header.ejs %>
+
+<main>
+  <div class="container">
+    <form action="/create-invoice" method="POST">
+      <label for="client">Client name</label>
+      <input type="text" name="client"></input>
+      <button type="submit">Generate invoice PDF</button>
+    </form>
+  </div>
+</main>
+
+<%- include partials/footer.ejs %>  
