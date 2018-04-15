@@ -1,1 +1,75 @@
-fuck <%= data %>
+<link href="invoice.css" rel="stylesheet" type="text/css"/>
+
+<section class="header">
+  <img src="logo.png"/>
+  <div>
+    <h1><%= agencyData.name %></h1>
+    <h2><%= agencyData.slogan %></h2>
+  </div>
+  <div>
+    <p><%= agencyData.address %></p>
+    <p><%= agencyData.phone %></p>
+    <p><%= agencyData.email %></p>
+  </div>
+</section>
+
+<section class="intro">
+  <div class="invoice-to"><%= invoiceData.invoiceTo %></div>
+  <h3>Invoice <%= invoiceData.invoiceNo %></h3>
+  <p><span>Date issued:</span> <%= dateIssued %></p>
+  <p><span>Project title:</span> <%= invoiceData.projectName %></p>  
+</section>
+
+<section class="items">
+  <h3>Breakdown</h3>
+  <table>
+    <tr>
+      <th>Description</th>
+      <th>Quantity</th>
+      <th>Unit cost</th>
+      <th>Total</th>
+    </tr>
+    <% for (var i = 0; i < invoiceData.items.length; i++) { %>
+      <tr>
+        <td>
+          <h4><%= invoiceData.items[i].name %></h4>
+          <p><%= invoiceData.items[i].description %></p>
+        </td>
+        <td><%= invoiceData.items[i].quantity %></td>
+        <td>£<%= invoiceData.items[i].unitCost %></td>
+        <td>£<%= invoiceData.items[i].unitCost * invoiceData.items[i].quantity %></td>
+      </tr>
+    <% } %>
+    <tr>
+      <td></td><td></td>
+      <td>Subtotal</td>
+      <td>£<%= subTotal %>.00</td>
+    </tr>
+    <tr>
+      <td></td><td></td>
+      <td>Deductions</td>
+      <td>£<%= invoiceData.deductions %>.00</td>
+    </tr>
+    <tr>
+      <td></td><td></td>
+      <td>Grand total</td>
+      <td>£<%= grandTotal %>.00</td>
+    </tr>
+  </table>
+</section>
+
+<section class="payent">
+  <h3>Payment</h3>
+  <p>Please make payment via BACS to:</p>
+  <p>
+    <strong>
+      Joshua Hackett<br />
+      40-11-37<br />
+      11433733
+    </strong>
+  </p>
+  <p>Including the invoice number as payment reference.</p>
+  <p>Web hosting plans are a recurring monthly cost, due on the first business day of each month.</p>
+  <p>Payment is due within 30 days from the date of this invoice. If you have any questions, feel free to contact hello@smallwins.co.uk.</p>
+  <p>Thank you for your business.</p>
+</section>

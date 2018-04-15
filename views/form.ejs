@@ -2,12 +2,43 @@
 
 <main>
   <div class="container">
-    <form action="/create-invoice" method="POST">
-      <label for="client">Client name</label>
-      <input type="text" name="client"></input>
-      <button type="submit">Generate invoice PDF</button>
+    <form action="/" method="POST">
+
+      <label for="invoiceTo">Invoice to</label>
+      <textarea type="text" rows="4" id="invoiceTo" name="invoiceTo" required></textarea>
+
+      <label for="projectName">Invoice number</label>
+      <input type="text" id="invoiceNo" name="invoiceNo" required></input>
+
+      <label for="projectName">Project name</label>
+      <input type="text" id="projectName" name="projectName" required></input>
+
+      <h3>Items</h3>
+
+      <table id="invoice-items">
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Quantity</th>
+          <th>Unit cost (£)</th>
+        </tr>
+        <tr>
+          <td><input type="text" name="items[][name]" required></input></td>
+          <td><input type="text" name="items[][description]" required></input></td>
+          <td><input type="number" min="1" value="1" class="quantity" name="items[][quantity]" onChange="updateTotal()" required></input></td>
+          <td><input type="number" min="1" class="unitCost" name="items[][unitCost]" onChange="updateTotal()" required></input></td>
+        </tr>
+      </table>
+
+      <button class="btn-small" type="button" id="add-row-button" onclick="addNewItem()">Add item</button>
+      <span id="invoice-items-total">£<span>00</span>.00</span>
+
+      <label for="project-name">Deductions (£)</label>
+      <input type="number" min="0" value="0" id="deductions" name="deductions" required></input>
+
+      <button class="btn-big" type="submit">Generate invoice</button>
     </form>
   </div>
 </main>
 
-<%- include partials/footer.ejs %>  
+<%- include partials/footer.ejs %>

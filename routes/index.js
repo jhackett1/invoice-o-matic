@@ -5,20 +5,31 @@ const ejs = require('ejs');
 const fs = require('fs');
 const HTMLToPDF = require('html5-to-pdf')
 
+let agencyData = require('../config.json');
+
 // GET form
 router.get('/', function(req, res, next) {
   res.render('form');
 });
 
 // POST form
-router.post('/create-invoice', function(req, res, next){
+router.post('/', function(req, res, next){
 
-  let data = req.body;
-
-  console.log(data)
+  // Calulate totals
+  let subTotal = 0;
+  req.body.items.forEach(function(item){
+    subTotal += (item.quantity * item.unitCost);
+  })
+  let grandTotal = subTotal - req.body.deductions;
 
   // Create a HTML document from data and ejs template
-  ejs.renderFile(path.join(__dirname, '../views/template.ejs'), data)
+  ejs.renderFile(path.join(__dirname, '../views/template.ejs'), {
+    invoiceData: req.body,
+    agencyData: agencyData,
+    dateIssued: new Date(),
+    subTotal: subTotal,
+    grandTotal: grandTotal
+  })
     .then(html=>{
       saveHTML(html);
     })
