@@ -1,6 +1,6 @@
 <link href="invoice.css" rel="stylesheet" type="text/css"/>
 
-<section class="header">
+<section class="header" style="color: #fafafa; backgound-color: #24D5A1; width: 100%">
   <img src="logo.png"/>
   <div>
     <h1><%= agencyData.name %></h1>
@@ -17,7 +17,7 @@
   <div class="invoice-to"><%= invoiceData.invoiceTo %></div>
   <h3>Invoice <%= invoiceData.invoiceNo %></h3>
   <p><span>Date issued:</span> <%= dateIssued %></p>
-  <p><span>Project title:</span> <%= invoiceData.projectName %></p>  
+  <p><span>Project title:</span> <%= invoiceData.projectName %></p>
 </section>
 
 <section class="items">

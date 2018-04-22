@@ -38,7 +38,7 @@ router.post('/', function(req, res, next){
     })
   // Save the HTML document to disk
   function saveHTML(html){
-    fs.writeFile(path.join(__dirname, '../public/test.html'), html, function(err){
+    fs.writeFile(path.join(__dirname, '../public/output.html'), html, function(err){
       if(err) return console.log(err);
       convertToPDF()
     })
@@ -46,7 +46,7 @@ router.post('/', function(req, res, next){
   // Convert the PDF to
   function convertToPDF(){
     const htmlToPDF = new HTMLToPDF({
-      inputPath: path.join(__dirname, '../public/test.html'),
+      inputPath: path.join(__dirname, '../public/output.html'),
       outputPath: path.join(__dirname, '../public/output.pdf'),
     })
     htmlToPDF.build((error) => {
