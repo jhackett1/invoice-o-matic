@@ -21,16 +21,18 @@ router.post('/', function(req, res, next){
   })
   let grandTotal = subTotal - req.body.deductions;
 
+  let now = new Date();
+
   let data = {
     invoiceData: req.body,
     agencyData: agencyData,
-    dateIssued: new Date().toDateString(),
+    dateIssued: now.toDateString(),
     subTotal: subTotal,
     grandTotal: grandTotal
   }
 
   data.invoiceData.invoiceTo = data.invoiceData.invoiceTo.replace(new RegExp('\n', 'g'), '<br/>')
-
+  
   // Create a HTML document from data and ejs template
   ejs.renderFile(path.join(__dirname, '../views/template.ejs'), data)
     .then(html=>{
