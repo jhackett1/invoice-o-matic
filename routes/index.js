@@ -32,7 +32,7 @@ router.post('/', function(req, res, next){
   }
 
   data.invoiceData.invoiceTo = data.invoiceData.invoiceTo.replace(new RegExp('\n', 'g'), '<br/>')
-  
+
   // Create a HTML document from data and ejs template
   ejs.renderFile(path.join(__dirname, '../views/template.ejs'), data)
     .then(html=>{
@@ -53,7 +53,7 @@ router.post('/', function(req, res, next){
     const htmlToPDF = new HTMLToPDF({
       inputPath: path.join(__dirname, '../public/output.html'),
       outputPath: path.join(__dirname, '../public/output.pdf'),
-      templatePath: path.join(__dirname, "../template"),
+      // templatePath: path.join(__dirname, "../public/template.html"),
       include: [
         {
           type: 'css',
