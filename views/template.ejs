@@ -1,84 +1,82 @@
-<link href="invoice.css" rel="stylesheet" type="text/css"/>
+<html>
+  <head>
+      <link href="invoice.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body>
 
-<section class="header">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 258.76 260.14">
-    <g id="Layer_1-2" data-name="Layer 1">
-      <path class="cls-1" d="M218.3,203.76a39.88,39.88,0,0,0-27.58,11,6.65,6.65,0,0,0-.91.76,18.86,18.86,0,1,1-26.67-26.67h0l76.34-76.34h0l0,0,.3-.3c.1-.1.2-.21.29-.32A65.86,65.86,0,0,0,147,18.68l-.32.29L70.35,95.28a6.62,6.62,0,0,0-1.51,1.13A18.86,18.86,0,0,1,42.17,69.74a6.65,6.65,0,0,0,.76-.91,40.14,40.14,0,0,0-.79-56,6.64,6.64,0,0,0-9.4,9.4,26.88,26.88,0,0,1,0,38,6.69,6.69,0,0,0-.77.93,32.14,32.14,0,0,0,45.18,45.66,6.64,6.64,0,0,0,1.63-1.19l77-76.95h0A52.59,52.59,0,0,1,230.13,103l-77,77a6.72,6.72,0,0,0-.48.54,32.14,32.14,0,0,0,45.7,45.13,6.71,6.71,0,0,0,.92-.76,26.88,26.88,0,0,1,38,0,6.64,6.64,0,0,0,9.4-9.4A39.9,39.9,0,0,0,218.3,203.76Z"></path>
-      <path class="cls-1" d="M133.51,125.94a6.64,6.64,0,0,0-9.4,0L40.46,209.59a6.64,6.64,0,1,0,9.4,9.4l83.65-83.65A6.64,6.64,0,0,0,133.51,125.94Z"></path>
-      <circle class="cls-1" cx="136.65" cy="79.22" r="8.72" transform="translate(-15.99 119.83) rotate(-45)"></circle>
-      <circle class="cls-1" cx="178.28" cy="120.86" r="8.72" transform="translate(-33.24 161.46) rotate(-45)"></circle>
-      <path class="cls-1" d="M133.73,240.24a22.59,22.59,0,1,1-32-32,6.66,6.66,0,0,0,.92-1.17L154.11,156a6.65,6.65,0,1,0-9.38-9.42L92.27,198.75a6.63,6.63,0,0,0-1,1.33,35.88,35.88,0,0,0,51.89,49.55,6.64,6.64,0,0,0-9.4-9.4Z"></path>
-      <path class="cls-1" d="M61.38,167.86l52.21-52.46a6.65,6.65,0,0,0-9.42-9.38L53,157.43a6.64,6.64,0,0,0-1.16.92,22.59,22.59,0,0,1-32-32,6.65,6.65,0,1,0-9.4-9.4A35.88,35.88,0,0,0,60,168.89,6.64,6.64,0,0,0,61.38,167.86Z"></path>
-    </g>
-  </svg>
-  <div>
-    <h1><%= agencyData.name %></h1>
-    <h2><%= agencyData.slogan %></h2>
-  </div>
-  <div>
-    <p><%- agencyData.address %></p>
-    <p><%= agencyData.phone %></p>
-    <p><%= agencyData.email %></p>
-  </div>
-</section>
 
-<section class="intro">
-  <div class="invoice-to"><strong>INVOICE TO:</strong> <%- invoiceData.invoiceTo %></div>
-  <h3>Invoice <%= invoiceData.invoiceNo %></h3>
-  <p><span>Date issued:</span> <%= dateIssued %></p>
-  <p><span>Project title:</span> <%= invoiceData.projectName %></p>
-</section>
 
-<section class="items">
-  <h3>Breakdown</h3>
-  <table>
-    <tr>
-      <th>Description</th>
-      <th>Hours</th>
-      <th>Hourly rate</th>
-      <th>Total</th>
-    </tr>
-    <% for (var i = 0; i < invoiceData.items.length; i++) { %>
+  <section class="header">
+    <div>
+      <h1><%= agencyData.name %></h1>
+      <h2><%= agencyData.slogan %></h2>
+    </div>
+    <div>
+      <p><%- agencyData.address %></p>
+      <p><%= agencyData.phone %></p>
+      <p><%= agencyData.email %></p>
+    </div>
+  </section>
+
+  <section class="intro">
+    <div class="invoice-to"><strong>INVOICE TO:</strong> <%- invoiceData.invoiceTo %></div>
+    <h3>Invoice <%= invoiceData.invoiceNo %></h3>
+    <p><span>Date issued:</span> <%= dateIssued %></p>
+    <p><span>Project title:</span> <%= invoiceData.projectName %></p>
+  </section>
+
+  <section class="items">
+    <h3>Breakdown</h3>
+    <table>
       <tr>
-        <td>
-          <h4><%= invoiceData.items[i].name %></h4>
-          <p><%= invoiceData.items[i].description %></p>
-        </td>
-        <td><%= invoiceData.items[i].quantity %></td>
-        <td>£<%= invoiceData.items[i].unitCost %></td>
-        <td>£<%= invoiceData.items[i].unitCost * invoiceData.items[i].quantity %></td>
+        <th>Description</th>
+        <th>Hours</th>
+        <th>Hourly rate</th>
+        <th>Total</th>
       </tr>
-    <% } %>
-    <tr class="summary">
-      <td></td><td></td>
-      <td class="label">Subtotal</td>
-      <td>£<%= subTotal %>.00</td>
-    </tr>
-    <tr class="summary">
-      <td></td><td></td>
-      <td class="label">Deductions</td>
-      <td>£<%= invoiceData.deductions %>.00</td>
-    </tr>
-    <tr class="summary">
-      <td></td><td></td>
-      <td class="label">Grand total</td>
-      <td>£<%= grandTotal %>.00</td>
-    </tr>
-  </table>
-</section>
+      <% for (var i = 0; i < invoiceData.items.length; i++) { %>
+        <tr>
+          <td>
+            <h4><%= invoiceData.items[i].name %></h4>
+            <p><%= invoiceData.items[i].description %></p>
+          </td>
+          <td><%= invoiceData.items[i].quantity %></td>
+          <td>£<%= invoiceData.items[i].unitCost %></td>
+          <td>£<%= invoiceData.items[i].unitCost * invoiceData.items[i].quantity %></td>
+        </tr>
+      <% } %>
+      <tr class="summary">
+        <td></td><td></td>
+        <td class="label">Subtotal</td>
+        <td>£<%= subTotal %>.00</td>
+      </tr>
+      <tr class="summary">
+        <td></td><td></td>
+        <td class="label">Deductions</td>
+        <td>£<%= invoiceData.deductions %>.00</td>
+      </tr>
+      <tr class="summary">
+        <td></td><td></td>
+        <td class="label">Grand total</td>
+        <td>£<%= grandTotal %>.00</td>
+      </tr>
+    </table>
+  </section>
 
-<section class="payent">
-  <h3>Payment</h3>
-  <p>Please make payment via BACS to:</p>
-  <p>
-    <strong>
-      Joshua Hackett<br />
-      40-11-37<br />
-      11433733
-    </strong>
-  </p>
-  <p>Including the invoice number as payment reference.</p>
-  <p>Web hosting plans are a recurring monthly cost, due on the first business day of each month.</p>
-  <p>Payment is due within 30 days from the date of this invoice. If you have any questions, feel free to contact hello@smallwins.co.uk.</p>
-  <p>Thank you for your business.</p>
-</section>
+  <section class="payent">
+    <h3>Payment</h3>
+    <p>Please make payment via BACS to:</p>
+    <p>
+      <strong>
+        Joshua Hackett<br />
+        40-11-37<br />
+        11433733
+      </strong>
+    </p>
+    <p>Including the invoice number as payment reference.</p>
+    <p>Web hosting plans are a recurring monthly cost, due on the first business day of each month.</p>
+    <p>Payment is due within 30 days from the date of this invoice. If you have any questions, feel free to contact hello@smallwins.co.uk.</p>
+    <p>Thank you for your business.</p>
+  </section>
+</body>
+</html>
